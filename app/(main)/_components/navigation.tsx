@@ -2,7 +2,7 @@
 
 import { cn } from "@/lib/utils";
 import { ChevronsLeft, MenuIcon, Plus, PlusCircle, Search, Settings, Trash } from "lucide-react";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { useState, useRef, ElementRef, useEffect } from "react";
 import { useMediaQuery } from "usehooks-ts";
 import { UserItem } from "./user-item";
@@ -13,14 +13,17 @@ import { toast } from "sonner";
 import { DocumentList } from "./document-list";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Trashbox } from "./trash-box";
-
+import { useSearch } from "@/app/hooks/use-search";
+import { useSettings } from "@/app/hooks/use-settings";
+import { Navbar } from "./navbar";
 
 
 export const Navigation = () => {
+    const search = useSearch();
+    const settings = useSettings();
+    const params = useParams();
     const pathname = usePathname();
     const isMobile = useMediaQuery("(max-width: 768px)");
-
-
     const create = useMutation(api.documents.create);
 
     const isResizingRef = useRef(false);
@@ -145,22 +148,22 @@ export const Navigation = () => {
 
                 <div>
                     <UserItem />
-                    <Item 
+                    <Item
                         label="Settings"
                         icon={Settings}
-                        onClick={() => {}}
+                        onClick={settings.onOpen}
                     />
 
-                    <Item 
+                    <Item
                         label="Search"
                         icon={Search}
                         isSearch
-                        onClick={() => {}}
+                        onClick={search.onOpen}
                     />
-                    
-                    <Item 
-                        onClick={handleCreate} 
-                        label="New doc" 
+
+                    <Item
+                        onClick={handleCreate}
+                        label="New doc"
                         icon={PlusCircle}
                         />
                 </div>
@@ -202,9 +205,16 @@ export const Navigation = () => {
                     isMobile && "left-0 w-full"
                 )}
             >
+                {!!params.documentId ? (
+                    <Navbar
+                        isCollapsed={isCollapsed}
+                        onResetWidth={resetWidth}
+                    />
+                ) : (
                 <nav className="bg-transparent px-3 py-2 w-full">
                 {isCollapsed && <MenuIcon onClick={resetWidth} role="button" className="h-6 w-6 text-muted-foreground" />}
                 </nav>
+                )}
             </div>
 
 

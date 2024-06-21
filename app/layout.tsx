@@ -5,6 +5,9 @@ import { ThemeProvider } from "next-themes";
 import { ConvexClientProvider } from "@/components/providers/convex-provider";
 
 import { Toaster } from "sonner";
+import { ModalProvider } from "@/components/providers/modal-provider";
+
+import { EdgeStoreProvider } from "@/lib/edgestore";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,8 +16,8 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "bezel PM",
   description: "The All in one workspace for PMs",
-  icons: { 
-    icon: [ 
+  icons: {
+    icon: [
       {
         media: "(prefers-color-scheme: light)",
         url: "/favicon.ico",
@@ -38,6 +41,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ConvexClientProvider>
+          <EdgeStoreProvider>
           <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -46,8 +50,10 @@ export default function RootLayout({
           storageKey="bezel-theme-2"
           >
             <Toaster position="bottom-center"/>
+            <ModalProvider />
             {children}
           </ThemeProvider>
+          </EdgeStoreProvider>
         </ConvexClientProvider>
         </body>
     </html>

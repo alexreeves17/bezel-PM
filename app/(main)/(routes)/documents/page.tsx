@@ -25,7 +25,7 @@ const DocumentsPage = () => {
 
     return (
         <div className="h-full flex flex-col items-center justify-center space-y-r">
-            
+
             {/* Lightmode image */}
             <Image
                 src="/Chill-time.svg"

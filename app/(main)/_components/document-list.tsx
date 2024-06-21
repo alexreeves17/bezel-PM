@@ -53,7 +53,6 @@ export const DocumentList = ({
     }
 
     return (
-        <div>
             <>
                 <p
                     style={{
@@ -65,7 +64,7 @@ export const DocumentList = ({
                         level === 0 && "hidden"
                     )}
                 >
-
+                <p>No docs inside</p>
                 </p>
                 {documents.map((document) => (
                     <div key={document._id}>
@@ -89,6 +88,5 @@ export const DocumentList = ({
                     </div>
                 ))}
             </>
-        </div>
     )
 }
