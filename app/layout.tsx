@@ -34,25 +34,25 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ConvexClientProvider>
-          <EdgeStoreProvider>
-          <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-          storageKey="bezel-theme-2"
-          >
-            <Toaster position="bottom-center"/>
-            <ModalProvider />
-            {children}
-          </ThemeProvider>
+            <EdgeStoreProvider>
+              <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+              storageKey="bezel-theme-2"
+              >
+              <Toaster position="bottom-center"/>
+              <ModalProvider />
+              {children}
+            </ThemeProvider>
           </EdgeStoreProvider>
         </ConvexClientProvider>
         </body>
