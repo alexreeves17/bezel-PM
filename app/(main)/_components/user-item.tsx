@@ -35,7 +35,7 @@ export const UserItem = () => {
             </div>
         </DropdownMenuTrigger>
         <DropdownMenuContent
-            classname="w-80"
+            className="w-80"
             align="start"
             alignOffset={11}
             forceMount
